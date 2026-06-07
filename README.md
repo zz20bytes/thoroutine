@@ -5,4 +5,4 @@
 This is a current WIP project that aims to combine regular threads with coroutines in the same library, because why not?
 
 ### Credits
-Banner image — @orengg_maric (Twitter/X)
+Banner image — [@orengg_maric](https://x.com/orengg_maric)
