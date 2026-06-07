@@ -16,4 +16,15 @@
       pthread_join(*thread, nullptr);
    }
 #elif _WIN32
+   void uthread_create(underlying_thread_t* thread, void*(*fn)(void*), void* arg)
+   {
+   }
+
+   void uthread_detach(underlying_thread_t* thread)
+   {
+   }
+
+   void uthread_join(underlying_thread_t* thread)
+   {
+   }
 #endif
