@@ -2,6 +2,7 @@
 #define _UTIl_HPP
 
 #define variadic_to_tuple(T_typename, argname) std::tuple<T_typename...>(std::forward<T_typename>(argname)...)
+#include "uthread.hpp"
 #include <tuple>
 
 // function type
@@ -28,11 +29,11 @@ struct ThreadInfo {
 };
 
 template <typename Fn, typename ...Args>
-void* compliant_fn(void* ptr) {
+thread_return_t compliant_fn(thread_arg_t ptr) {
    auto info = static_cast< ThreadInfo<Fn, Args...>* >(ptr);
    std::apply(info->callback, std::move(info->args));
    delete info;
-   return nullptr;
+   return REGULAR_WRAPPER_RETURN;
 }
 
 #endif
