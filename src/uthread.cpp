@@ -1,7 +1,12 @@
 #include "uthread.hpp"
 
+/*TODO:
+ * make sure to deal with thread creation failure
+ * add way to get thread id
+*/
+
 #ifdef __linux__
-   void uthread_create(underlying_thread_t* thread, THREAD_POINTER_T(fn), thread_arg_t arg)
+   void uthread_create(underlying_thread_t* thread, THREAD_FPOINTER_T(fn), thread_arg_t arg)
    {
       pthread_create(thread, nullptr, fn, arg);
    }
@@ -16,7 +21,7 @@
       pthread_join(*thread, nullptr);
    }
 #elif _WIN32
-   void uthread_create(underlying_thread_t* thread, THREAD_POINTER_T(fn), thread_arg_t arg)
+   void uthread_create(underlying_thread_t* thread, THREAD_FPOINTER_T(fn), thread_arg_t arg)
    {
       *thread = CreateThread(
          NULL,    // default security attributes

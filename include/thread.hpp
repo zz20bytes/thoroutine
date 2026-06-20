@@ -2,6 +2,7 @@
 #define THREAD_HPP
 
 #include "_util.hpp"
+#include "_info.hpp"
 #include "uthread.hpp"
 
 class MThread {
@@ -13,11 +14,11 @@ class MThread {
          using decay_fn = typename std::decay_t<Fn>;
 
          auto info = new ThreadInfo< decay_fn, Args&&... >(
-            std::decay_t<Fn>(std::forward<Fn>(fn)),
+            decay_fn(std::forward<Fn>(fn)),
             std::forward<Args>(args)...
          );
 
-         uthread_create(&_underlying, &compliant_fn< std::decay_t<Fn>, Args&&... >, info);
+         uthread_create(&_underlying, base_wrapper< decay_fn, Args&&... >, info);
       }
 
       void detach() {
